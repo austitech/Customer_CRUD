@@ -13,7 +13,7 @@ def app_factory():
     app = Flask(__name__)
 
     app.config.from_object(config.ProductionConfig)
-    if os.environ.get("FLASK_ENV").lower() == "development":
+    if os.environ.get("FLASK_ENV") == "development":
         app.config.from_object(config.DevelopmentConfig)
 
     # register extension
