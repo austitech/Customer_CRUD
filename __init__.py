@@ -19,7 +19,7 @@ def app_factory():
     app.config["SECRET_KEY"] = "jeeuewifiueeowuegeeiueyoeiuefogfyfefe"
     app.config['MONGODB_SETTINGS'] = {
         'host': 'mongodb+srv://austino:austino19928@cluster0-qht2p.mongodb.net/custdb?retryWrites=true&w=majority',
-        'connect': False,
+        'connect': True
     }
 
     # register extension
