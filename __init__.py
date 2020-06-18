@@ -27,4 +27,4 @@ def app_factory():
     return app
 
 
-app_factory()
+myapp = app_factory()
