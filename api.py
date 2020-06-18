@@ -1,19 +1,14 @@
 
+from flask import request
+
 from flask_restful import Resource
-from flask_restful import reqparse
 
-from .database.models import Customer
-
-
-parser = reqparse.RequestParser()
-parser.add_argument('firstname', type=str)
-parser.add_argument('lastname', type=str)
-parser.add_argument('email', type=str)
+from .database.customer import Customer
 
 
 class ListCreateCustomer(Resource):
     def post(self):
-        data = parser.parse_args()
+        data = request.get_json(force=True)
         Customer(**data).save()
 
         return {"status": "OK"}, 201
@@ -26,7 +21,7 @@ class ListCreateCustomer(Resource):
 
 class GetUpdateDeleteCustomer(Resource):
     def put(self, cust_id):
-        data = parser.parse_args()
+        data = request.get_json(force=True)
 
         Customer.objects.get(id=cust_id).update(**data)
 
@@ -38,6 +33,6 @@ class GetUpdateDeleteCustomer(Resource):
         return {"status": "DELETED"}, 200
 
     def get(self, cust_id):
-        customer = Customer.objects.get(id=cust_id)
+        customer = Customer.objects.get(id=cust_id).to_json()
 
         return customer, 200

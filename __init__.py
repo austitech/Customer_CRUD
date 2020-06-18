@@ -1,3 +1,4 @@
+import os
 
 from flask import Flask
 from flask_restful import Api
@@ -8,11 +9,11 @@ from .api import ListCreateCustomer, GetUpdateDeleteCustomer
 from . import config
 
 
-def app_factory(testing=False):
+def app_factory():
     app = Flask(__name__)
 
     app.config.from_object(config.ProductionConfig)
-    if testing:
+    if os.environ.get("FLASK_ENV").lower() == "development":
         app.config.from_object(config.DevelopmentConfig)
 
     # register extension
