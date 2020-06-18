@@ -25,3 +25,6 @@ def app_factory():
     api.add_resource(GetUpdateDeleteCustomer, "/v1/customer/<string:cust_id>")
 
     return app
+
+
+app_factory()
